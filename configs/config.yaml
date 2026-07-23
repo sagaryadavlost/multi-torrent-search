@@ -1,0 +1,55 @@
+server:
+  host: "0.0.0.0"
+  port: 8080
+  mode: "debug"
+
+database:
+  path: "./data/torrentsearch.db"
+
+search:
+  timeout: 30
+  max_results_per_provider: 50
+  user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+providers:
+  enabled_by_default:
+    - "1337x"
+    - "nyaa"
+    - "yts"
+    - "thepiratebay"
+    - "rutor"
+    - "eztv"
+    - "limetorrents"
+    - "torrentdownloads"
+    - "bitsearch"
+    - "bt4g"
+    - "torrentkitty"
+    - "tokyotoshokan"
+    - "anilibria"
+    - "animetosho"
+    - "anirena"
+    - "bangumimoe"
+    - "mikan"
+    - "subsplease"
+    - "dmhy"
+    - "audiobookbay"
+    - "knaben"
+    - "blueroms"
+    - "internetarchive"
+    - "filemood"
+    - "linux_tracker"
+    - "megapeer"
+    - "nekobt"
+    - "torrent9"
+    - "torrentdatabase"
+    - "torrentdownload"
+    - "torrentscsv"
+    - "uindex"
+    - "oxTorrent"
+    - "therarbg"
+    - "thirteen37x"
+    - "zeromagnet"
+    - "sukebei"
+    - "myponclub"
+    - "xxxclub"
+    - "xxxtracker"
