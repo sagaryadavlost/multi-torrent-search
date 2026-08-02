@@ -92,6 +92,7 @@ cd web
 npm install
 npm run build
 # Output goes to ../static
+cd ..
 ```
 
 **2. Build and run the backend:**
