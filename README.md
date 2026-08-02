@@ -38,7 +38,7 @@ A web-based torrent search engine that searches across multiple torrent provider
 ## Architecture
 
 ```bash
-torrentsearch-web/
+.
 ├── cmd/server/          # Go HTTP server entry point
 ├── internal/
 │   ├── handlers/        # HTTP handlers (API routes)
@@ -88,7 +88,7 @@ torrentsearch-web/
 **1. Build the frontend:**
 
 ```bash
-cd torrentsearch-web/web
+cd web
 npm install
 npm run build
 # Output goes to ../static
@@ -97,9 +97,8 @@ npm run build
 **2. Build and run the backend:**
 
 ```bash
-cd torrentsearch-web
-go build -o torrentsearch-web ./cmd/server
-./torrentsearch-web
+go build -o torrentsearch ./cmd/server
+./torrentsearch
 ```
 
 **3. Open `http://localhost:8080`**
@@ -107,19 +106,19 @@ go build -o torrentsearch-web ./cmd/server
 ### Production Build
 
 ```bash
-cd torrentsearch-web/web
+cd web
 npm run build
 
-cd ../
-CGO_ENABLED=0 go build -ldflags="-s -w" -o torrentsearch-web ./cmd/server
+cd ..
+CGO_ENABLED=0 go build -ldflags="-s -w" -o torrentsearch ./cmd/server
 
 # Run the binary
-./torrentsearch-web
+./torrentsearch
 ```
 
 ### Configuration
 
-Edit `torrentsearch-web/configs/config.yaml`:
+Edit `configs/config.yaml`:
 
 ```yaml
 server:
@@ -222,18 +221,18 @@ type Category string // Movies, TV, Music, Games, Software, Anime, Books, XXX
 ```dockerfile
 FROM golang:1.21-alpine AS builder
 WORKDIR /app
-COPY torrentsearch-web/ .
+COPY . .
 RUN cd web && npm install && npm run build
-RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o torrentsearch-web ./cmd/server
+RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o torrentsearch ./cmd/server
 
 FROM alpine:latest
 RUN apk --no-cache add ca-certificates
 WORKDIR /app
-COPY --from=builder /app/torrentsearch-web .
+COPY --from=builder /app/torrentsearch .
 COPY --from=builder /app/configs ./configs
 COPY --from=builder /app/static ./static
 EXPOSE 8080
-CMD ["./torrentsearch-web"]
+CMD ["./torrentsearch"]
 ```
 
 ### Systemd Service
@@ -247,7 +246,7 @@ After=network.target
 Type=simple
 User=torrentsearch
 WorkingDirectory=/opt/torrentsearch
-ExecStart=/opt/torrentsearch/torrentsearch-web
+ExecStart=/opt/torrentsearch/torrentsearch
 Restart=on-failure
 Environment=GIN_MODE=release
 
